@@ -32,6 +32,7 @@ Route::post('register',[AuthController::class,'register']);
 Route::get('logout', [AuthController::class, 'logout']);
 Route::get('user', [AuthController::class, 'user']);
 Route::post('update-profile',[AuthController::class,'updateprofile']);
+Route::post('update-dataprofile',[AuthController::class,'updateUserData']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

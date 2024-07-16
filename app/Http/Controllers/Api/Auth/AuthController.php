@@ -125,6 +125,27 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 
+    public function updateUserData(Request $request)
+    {
+        $id = $request->id;
+        $input = $request->all();
+        $pelanggan = Pelanggan::where('id', '=',$id)->first();
+        $user = User::where('email','=',$pelanggan->email)->first();
+        Log::info($user);
+        $user->update([
+            'name' => $input["name"],
+            "email" => $input["email"],
+            'password' => Hash::make($input["password"])
+        ]);
+        $pelanggan->update([
+            "nama" => $input["name"],
+            "email" => $input["email"],
+            "no_hp" => $input["no_hp"]
+        ]);
+        // // dd($user);
+        return response()->json(['message' => 'success'], 200);
+    }
+
     public function updateprofile(Request $request)
     {
         $id = $request->id;
@@ -140,7 +161,7 @@ class AuthController extends Controller
         $directory = 'profile/';
 
         // $user = User::findOrFail($id);
-        $user = Pelanggan::where('id','=',$id)->first();
+        $user = Pelanggan::where('id', '=', $id)->first();
         Log::info($user);
         $user->update([
             'foto' => url('profile/' . $fileName)

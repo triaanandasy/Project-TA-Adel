@@ -11,6 +11,6 @@ class Pelanggan extends Model
     use HasFactory,SoftDeletes;
 
     protected $fillable = [
-        'nama', 'email', 'noHp', 'alamat','foto','created_by'
+        'nama', 'email', 'no_hp', 'alamat','foto','created_by'
     ];
 }
